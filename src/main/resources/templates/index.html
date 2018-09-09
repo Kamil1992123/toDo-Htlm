@@ -3,26 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <style>
+
+        .task-finished {
+            color: green;
+        }
+
+        .task-unfinished {
+            color: red;
+        }
+
+        .task-size{
+
+            font-size: 50px;
+        }
+
+        .buttonColor{
+            color: white;
+        }
+
+    </style>
+
 </head>
 <body>
 
-<h1>Lista zadań:</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-<!--
-    th:each odpowiednich foreach
-    dla thymeleaf, html
-    for ( task: tasks){
+    <div class="container">
+        <div class="row">
+            <a class="navbar-brand" href="/">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    }
--->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/tasks">Wszystkie <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/finished">Skończone</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/unfinished">Nieskończone</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
 
-<ul th:each="task: ${tasks}">
-<li th:text="${task}">
+<div class="container">
+    <div class="row">
 
-</li>
+            <h1>Lista zadań:</h1>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+            <td>Nazwa</td>
+            <td>Opis</td>
+            <td>Skończony?</td>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="task: ${tasks}">
+                <td th:text="${task.getName()}"></td>
+                <td th:text="${task.getDescription()}"></td>
+                <td>
+                    <span th:if="${task.isFinished()}" class="task-finished task-size"><i class="far fa-smile-beam"></i></span>
+                    <span th:if="${!task.isFinished()}" class="task-unfinished task-size"><i class="far fa-sad-tear"></i></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary"><a href="/" class="buttonColor">Powrót</a> </button>
+    </div>
+</div>
 
 
-</ul>
+
+
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
